@@ -20,6 +20,11 @@ void input_data(int i)
 	scanf("%s", temp_str);
 	strcpy(data.str, temp_str);
 	data.length = strlen(data.str);
+	if (data.length >= 64)
+	{
+		printf("Data length is too long!\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 int main(void)
