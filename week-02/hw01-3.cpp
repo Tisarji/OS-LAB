@@ -32,10 +32,8 @@ int main(void)
 	pid_t	pid1;
 	pid_t	pid2;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	pid1 = 0;
 	pid2 = 0;
 	while (1)

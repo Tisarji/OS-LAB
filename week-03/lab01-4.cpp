@@ -8,18 +8,16 @@
 #define BUFFER_SIZE 100
 
 struct {
-	int n[BUFFER_SIZE];
-	int power[BUFFER_SIZE];
+	int n1[BUFFER_SIZE];
+	int n2[BUFFER_SIZE];
 } data;
 
 void input_data(int i)
 {
-	int sum = 0;
-
-	printf("Enter Input: ");
-	scanf("%d", &sum);
-	data.n[i] = sum;
-	data.power[i] = sum * 2;
+	printf("Enter Input First: ");
+	scanf("%d", &data.n1[i]);
+	printf("Enter Input Second: ");
+	scanf("%d", &data.n2[i]);
 }
 
 int main(void)
@@ -30,34 +28,34 @@ int main(void)
 	while (1)
 	{
 		input_data(i);
-		if (data.n[i] < 0)
+
+		if (data.n1[i] < 0)
 		{
 			printf("Terminating program.\n");
-			break ;
-			exit(EXIT_FAILURE);
+			break;
 		}
 		pid1 = fork();
 		if (pid1 < 0)
 		{
-			printf("Fork failed!");
+			printf("Fork Failed!");
 			exit(EXIT_FAILURE);
 		}
 		else if (pid1 == 0)
 		{
-			printf("Data Shared: %d\n", data.n[i]);
-			sleep(1);
+			printf("First data = %d\n", data.n1[i]);
+			sleep(3);
 			exit(EXIT_SUCCESS);
 		}
 		pid2 = fork();
 		if (pid2 < 0)
 		{
-			printf("Fork failed!");
+			printf("Fork Failed!");
 			exit(EXIT_FAILURE);
 		}
 		else if (pid2 == 0)
 		{
-			printf("Data Power of 2: %d\n", data.power[i]);
-			sleep(2);
+			printf("Second data = %d\n", data.n2[i]);
+			sleep(3);
 			exit(EXIT_SUCCESS);
 		}
 		waitpid(pid1, NULL, 0);
