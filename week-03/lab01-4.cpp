@@ -14,6 +14,7 @@ struct {
 
 void input_data(int i)
 {
+	printf("\nProcess A: \n");
 	printf("Enter Input First: ");
 	scanf("%d", &data.n1[i]);
 	printf("Enter Input Second: ");
@@ -28,7 +29,6 @@ int main(void)
 	while (1)
 	{
 		input_data(i);
-
 		if (data.n1[i] < 0)
 		{
 			printf("Terminating program.\n");
@@ -42,10 +42,12 @@ int main(void)
 		}
 		else if (pid1 == 0)
 		{
-			printf("First data = %d\n", data.n1[i]);
+			printf("Process B: NO.[%d] First data: %d\n",i ,data.n1[i]);
 			sleep(3);
 			exit(EXIT_SUCCESS);
 		}
+		else
+			waitpid(pid1, NULL, 0);
 		pid2 = fork();
 		if (pid2 < 0)
 		{
@@ -54,12 +56,12 @@ int main(void)
 		}
 		else if (pid2 == 0)
 		{
-			printf("Second data = %d\n", data.n2[i]);
+			printf("Process C: NO.[%d] Second data: %d\n", i,  data.n2[i]);
 			sleep(3);
 			exit(EXIT_SUCCESS);
 		}
-		waitpid(pid1, NULL, 0);
-		waitpid(pid2, NULL, 0);
+		else
+			waitpid(pid2, NULL, 0);
 		i++;
 	}
 	return (0);
