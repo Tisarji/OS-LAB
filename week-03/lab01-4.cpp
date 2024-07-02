@@ -14,23 +14,24 @@ struct {
 
 void input_data(int i)
 {
-	printf("\nProcess A: \n");
-	printf("NO_idx.[%d] :Enter Data First: ", i);
+	printf("\033[0;36m\nProcess A: \n\033[0m");
+	printf("\033[0;36mNO_idx.[%d] :Enter Data First: \033[0m", i);
 	scanf("%d", &data.n1[i]);
-	printf("NO_idx.[%d] :Enter Data Second: ", i);
+	printf("\033[0;36mNO_idx.[%d] :Enter Data Second: \033[0m", i);
 	scanf("%d", &data.n2[i]);
 }
 
 void process_B(int index)
 {
 	sleep(3);
-	printf("Process B: NO.[%d] First data: %d\n", index, data.n1[index]);
+	printf("\033[0;32mProcess B: NO.[%d] First data: %d \033[0m\n", index, data.n1[index]);
 }
 
 void process_C(int index)
 {
-	sleep(3);
-	printf("Process C: NO.[%d] Second data: %d\n", index, data.n2[index]);
+	if (index != 0)
+		sleep(3);
+	printf("\033[0;32mProcess C: NO.[%d] Second data: %d \033[0m\n", index, data.n2[index]);
 }
 
 int main(void)
@@ -73,7 +74,6 @@ int main(void)
 
 		i++;
 	}
-	// Wait for all child processes to complete
 	while (wait(NULL) > 0);
 	return (0);
 }
