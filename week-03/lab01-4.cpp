@@ -74,6 +74,5 @@ int main(void)
 
 		i++;
 	}
-	while (wait(NULL) > 0);
 	return (0);
 }
