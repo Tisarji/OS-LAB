@@ -15,10 +15,22 @@ struct {
 void input_data(int i)
 {
 	printf("\nProcess A: \n");
-	printf("Enter Input First: ");
+	printf("NO_idx.[%d] :Enter Data First: ", i);
 	scanf("%d", &data.n1[i]);
-	printf("Enter Input Second: ");
+	printf("NO_idx.[%d] :Enter Data Second: ", i);
 	scanf("%d", &data.n2[i]);
+}
+
+void process_B(int index)
+{
+	printf("Process B: NO.[%d] First data: %d\n", index, data.n1[index]);
+	sleep(3);
+}
+
+void process_C(int index)
+{
+	sleep(3);
+	printf("Process C: NO.[%d] Second data: %d\n", index, data.n2[index]);
 }
 
 int main(void)
@@ -34,6 +46,7 @@ int main(void)
 			printf("Terminating program.\n");
 			break;
 		}
+
 		pid1 = fork();
 		if (pid1 < 0)
 		{
@@ -42,12 +55,10 @@ int main(void)
 		}
 		else if (pid1 == 0)
 		{
-			printf("Process B: NO.[%d] First data: %d\n",i ,data.n1[i]);
-			sleep(3);
+			process_B(i);
 			exit(EXIT_SUCCESS);
 		}
-		else
-			waitpid(pid1, NULL, 0);
+
 		pid2 = fork();
 		if (pid2 < 0)
 		{
@@ -56,13 +67,13 @@ int main(void)
 		}
 		else if (pid2 == 0)
 		{
-			printf("Process C: NO.[%d] Second data: %d\n", i,  data.n2[i]);
-			sleep(3);
+			process_C(i);
 			exit(EXIT_SUCCESS);
 		}
-		else
-			waitpid(pid2, NULL, 0);
+
 		i++;
 	}
+	// Wait for all child processes to complete
+	while (wait(NULL) > 0);
 	return (0);
 }
