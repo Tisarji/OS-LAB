@@ -23,8 +23,8 @@ void input_data(int i)
 
 void process_B(int index)
 {
-	printf("Process B: NO.[%d] First data: %d\n", index, data.n1[index]);
 	sleep(3);
+	printf("Process B: NO.[%d] First data: %d\n", index, data.n1[index]);
 }
 
 void process_C(int index)
