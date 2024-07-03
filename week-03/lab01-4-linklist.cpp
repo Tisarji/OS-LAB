@@ -39,8 +39,8 @@ int main(void)
 	pid_t pid1, pid2;
 	int i = 0;
 
-	data.n1 = (int *)malloc(sizeof(int) * BUFFER_SIZE);
-	data.n2 = (int *)malloc(sizeof(int) * BUFFER_SIZE);
+	data.n1 = (int *)malloc(sizeof(int));
+	data.n2 = (int *)malloc(sizeof(int));
 
 	while (1)
 	{
