@@ -8,11 +8,11 @@
 #define BUFFER_SIZE 100
 
 struct {
-	int n1[BUFFER_SIZE];
-	int n2[BUFFER_SIZE];
+	int *n1;
+	int *n2;
 } data;
 
-void input_data(int i)
+void	input_data(int i)
 {
 	printf("\033[0;36m\nProcess A: \n\033[0m");
 	printf("\033[0;36mNO_idx.[%d] :Enter Data First: \033[0m", i);
@@ -38,6 +38,9 @@ int main(void)
 {
 	pid_t pid1, pid2;
 	int i = 0;
+
+	data.n1 = (int *)malloc(sizeof(int) * BUFFER_SIZE);
+	data.n2 = (int *)malloc(sizeof(int) * BUFFER_SIZE);
 
 	while (1)
 	{
@@ -74,5 +77,7 @@ int main(void)
 		}
 		i++;
 	}
+	free(data.n1);
+	free(data.n2);
 	return (0);
 }
