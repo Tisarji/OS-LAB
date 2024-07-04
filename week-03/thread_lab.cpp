@@ -11,7 +11,7 @@ struct {
 	int* n2;
 } data;
 
-void input_data(int i)
+void	input_data(int i)
 {
 	printf("\033[0;36m\nProcess A: \n\033[0m");
 	printf("\033[0;36mNO_idx.[%d] :Enter Data First: \033[0m", i);
@@ -20,7 +20,7 @@ void input_data(int i)
 	scanf("%d", &data.n2[i]);
 }
 
-void* process_B(void* arg)
+void	*process_B(void* arg)
 {
 	int index = *(int*)arg;
 	sleep(3);
@@ -28,7 +28,7 @@ void* process_B(void* arg)
 	pthread_exit(NULL);
 }
 
-void* process_C(void* arg)
+void	*process_C(void* arg)
 {
 	int index = *(int*)arg;
 	if (index != 0)
@@ -37,12 +37,12 @@ void* process_C(void* arg)
 	pthread_exit(NULL);
 }
 
-int main(void)
+int	main(void)
 {
 	pthread_t threads[BUFFER_SIZE * 2];
 	int indices[BUFFER_SIZE];
 	int i = 0;
-
+	int	j = 0;
 	data.n1 = (int*)malloc(BUFFER_SIZE * sizeof(int));
 	data.n2 = (int*)malloc(BUFFER_SIZE * sizeof(int));
 
@@ -59,11 +59,9 @@ int main(void)
 		pthread_create(&threads[i * 2 + 1], NULL, process_C, &indices[i]);
 		i++;
 	}
-
-	for (int j = 0; j < i * 2; j++)
-		pthread_join(threads[j], NULL);
-
+	while (j < i * 2)
+		pthread_join(threads[j++], NULL);
 	free(data.n1);
 	free(data.n2);
-	return 0;
+	return (0);
 }
