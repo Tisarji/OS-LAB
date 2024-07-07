@@ -7,8 +7,8 @@
 #define BUFFER_SIZE 100
 
 struct {
-	int* n1;
-	int* n2;
+	int	*n1;
+	int	*n2;
 } data;
 
 void	input_data(int i)
