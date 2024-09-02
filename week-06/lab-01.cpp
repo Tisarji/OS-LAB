@@ -72,7 +72,7 @@ void* philosopher(void* who)
 	if(sem_trywait(&chopstick[(no + 1) % CHAIRNUM]))
 	{
 		gotoxy(1, no * 4 + 1);
-		// printf("Mr %c Cannot taking chopstick...     \n", no + 'A'); 
+		printf("Mr %c Cannot taking chopstick...     \n", no + 'A'); 
 		fflush(stdout);	
 		sem_post(&chopstick[(no)]);
 		continue ;
@@ -81,7 +81,7 @@ void* philosopher(void* who)
 		/** Insert DeadLock */
 		randomDelay();
 		/** --------------- */
-		// sem_wait(&chopstick[(no + 1) % CHAIRNUM]);
+		sem_wait(&chopstick[(no + 1) % CHAIRNUM]);
 
 		gotoxy(1, no * 4 + 2);
 		printf("Mr. %c is taking a chopstick on the right side...\n", 'A' + no); fflush(stdout);
